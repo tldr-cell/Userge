@@ -1,5 +1,5 @@
 # set base image (host OS)
-FROM python:3.8
+FROM python:3.9.1
 
 # set the working directory in the container
 WORKDIR /app/
@@ -12,6 +12,7 @@ RUN apt -qq install -y --no-install-recommends \
     unzip \
     wget \
     ffmpeg \
+    p7zip \
     jq
 
 # install chrome
@@ -38,7 +39,7 @@ ENV GOOGLE_CHROME_BIN /usr/bin/google-chrome-stable
 COPY requirements.txt .
 
 # install dependencies
-RUN pip install -r requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
 # copy the content of the local src directory to the working directory
 COPY . .
